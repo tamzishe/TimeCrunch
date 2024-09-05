@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <title>Task Master</title>
+</head>
+<body>
+    <div class="content">
+        <h1>TimeCrunch</h1>
+        {% if tasks|length < 1 %}
+        <h5> There are no tasks to complete. Create one below!</h5>
+        {% else %}
+        <table>
+            <tr>
+                <th>Task</th>
+                <th>Added</th>
+                <th>Actions</th>
+            </tr>
+            {% for task in tasks %}
+                <tr>
+                    <td>{{ task.content }}</td>
+                    <td>{{ task.dateCreated.date() }}</td>
+                    <td>
+                        <a href="/delete/{{task.id}}">Delete</a>
+                        <br>
+                        <a href="/update/{{task.id}}">Update</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+        {% endif %}
+        <button onclick="toggleWindow()">Add New Task</button>
+    </div>
+    <div class=window id="openWindow">
+        <div id="overlay">
+            <div id="text">
+                <div class="close" onclick="toggleWindow()">&times;</div>
+                <h1>Title</h1>
+                <p>BLah BLah BLAKH</p>
+                <form action="/" method="POST">
+                    <input type="text" name="content" id="content">
+                    <input type="datetime-local" id="dueDate" name="dueDate">
+                    <input type="submit" value="Add Task">
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+<script>
+    function toggleWindow(){
+        document.getElementById("openWindow").classList.toggle("active");
+    }
+</script>
