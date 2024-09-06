@@ -4,9 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
-    <title>Task Master</title>
+    <title>TimeCrunch</title>
 </head>
-<body>
+<body >
+    <div id="titleCover" onclick="toggleTitle()">
+        <span>TimeCrunch</span>
+    </div>
     <div class="content">
         <h1>TimeCrunch</h1>
         {% if tasks|length < 1 %}
@@ -14,15 +17,19 @@
         {% else %}
         <table>
             <tr>
-                <th>Task</th>
+                <th><h3>To-Do</h3></th>
                 <th>Added</th>
+                <th>Due</th>
                 <th>Actions</th>
             </tr>
             {% for task in tasks %}
                 <tr>
-                    <td>{{ task.content }}</td>
+                    <td><strong>{{ task.content }}</strong></td>
                     <td>{{ task.dateCreated.date() }}</td>
+                    <td>{{ task.dueDate }}</td>
                     <td>
+                        <a href="/complete/{{task.id}}">Complete</a>
+                        <br>
                         <a href="/delete/{{task.id}}">Delete</a>
                         <br>
                         <a href="/update/{{task.id}}">Update</a>
@@ -31,14 +38,16 @@
             {% endfor %}
         </table>
         {% endif %}
-        <button onclick="toggleWindow()">Add New Task</button>
+        <button onclick="toggleWindow()"><h4>Add New Task</h4></button>
     </div>
     <div class=window id="openWindow">
         <div id="overlay">
             <div id="text">
                 <div class="close" onclick="toggleWindow()">&times;</div>
-                <h1>Title</h1>
-                <p>BLah BLah BLAKH</p>
+                <h1>Add New Task!</h1>
+                <br>
+                <p>Add something to-do and a due date if you're in a Time Crunch!</p>
+                <br>
                 <form action="/" method="POST">
                     <input type="text" name="content" id="content">
                     <input type="datetime-local" id="dueDate" name="dueDate">
@@ -53,4 +62,17 @@
     function toggleWindow(){
         document.getElementById("openWindow").classList.toggle("active");
     }
+</script>
+<script>
+    if (!sessionStorage.getItem('scriptHasRun')) {
+    console.log("run");
+        function toggleTitle(){
+            document.getElementById("titleCover").classList.toggle("active")
+        }
+    sessionStorage.setItem('scriptHasRun', true);
+} else {
+    document.getElementById("titleCover").style.visibility="hidden";
+    console.log("ran");
+}
+    
 </script>

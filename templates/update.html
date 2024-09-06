@@ -4,13 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
-    <title>Task Master</title>
+    <title>TimeCrunch</title>
 </head>
 <body>
     <h1>Update Task</h1>
     <div class="form">
+        <h1>Add New Task!</h1>
+        <p>Update something to-do and a due date if you're in a Time Crunch!</p>
         <form action="/update/{{task.id}}" method="POST">
             <input type="text" name="content" id="content" value ="{{task.content}}">
+            <input type="datetime-local" id="dueDate" name="dueDate" value="{{task.dueDateDebug}}">
             <input type="submit" value="Update Task">
         </form>
     </div>

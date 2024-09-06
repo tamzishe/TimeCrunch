@@ -4,8 +4,15 @@
     font-weight: normal;
     font-style: normal;
 }
+@font-face {
+    font-family: josefinSansLight;
+    src: url("/static/josefinSansFont/JosefinSansLight-ZVEll.ttf") format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
 body {
     display:flex;
+    align-items: center;
     flex-direction: column;
     margin: auto;
 }
@@ -13,17 +20,74 @@ h1{
     font-family: josefinSans;
     font-weight:500;
 }
-h2{
+h2,h5,p{
     font-family: josefinSans;
     font-weight:200;
     margin: 0;
     align-self: center;
 }
-th,td { 
-    border:1px solid black;
-    border-collapse: collapse;
+table{
+    border-collapse:collapse
 }
-#content{
+th,td { 
+    font-family: josefinSansLight;
+    padding: 10px;
+    border:none;
+    text-align: center;
+}
+tr{
+    background: rgb(227, 227, 227);
+    border-radius: 10%;
+    padding: 5px;
+    margin: 10px;
+    border:none
+}
+button {
+    cursor: pointer;
+    font-family: josefinSans;
+    font-weight: 300;
+    background-color: #5121c2; 
+    border: 3px solid #5121c2;
+    color: white;
+    padding: 10px 24px;
+    text-align: center;
+    transition-duration: 0.4s;
+}
+button:hover {
+    background-color: white;
+    color: #5121c2;
+}
+#titleCover {
+    position: fixed;
+    cursor: pointer;
+    background: rgb(255, 255, 255);
+    transition: 500ms;
+    transform: translateY(-50%, -50%);
+    height: 100vh;
+    width: 100vw;
+    top:0;
+    left: 0;
+    z-index: 3;
+    color: #323232;
+    font-size: 72px;
+    font-family: josefinSans;
+    text-align: center;
+    line-height: 100vh;
+}
+#titleCover.active {
+    position: fixed;
+    cursor: pointer;
+    background: white;
+    transition: 500ms;
+    transform: scale(0);
+    height: 0vh;
+    width: 100vw;
+}
+#openWindow.active #text {
+    transform: translate(-150%,-50%) scale(0);
+    transition: all 0.5s;
+}
+.content{
     margin: auto;
     z-index: 0;
 }
@@ -43,7 +107,7 @@ th,td {
     left: 50%;
     transform: translate(-50%,-50%) scale(0);
     position: absolute;
-    padding: 10px;
+    padding: 75px 15px;
     border-radius: 20px;
     filter: drop-shadow(0 0 8px rgb(76, 76, 76));
     z-index: 2;
