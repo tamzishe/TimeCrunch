@@ -183,6 +183,7 @@ tr{
     text-decoration: none;
     display: block;
     font-family: josefinSans;
+    text-align: center;
 }
 #actionsMenu a:hover {
     background-color: #bbbbbb;

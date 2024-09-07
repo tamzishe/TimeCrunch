@@ -7,6 +7,11 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///tasks.db'
 db = SQLAlchemy(app)
 
+class User(db.Model, UserMixin):
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(150), unique=True, nullable=False)
+    password = db.Column(db.String(200), nullable=False)
+
 class ToDo(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     content = db.Column(db.String(200), nullable=False)
@@ -67,6 +72,7 @@ def complete(id):
 def restore():
     tasks =  ToDo.query.order_by(ToDo.dateCreated).all()
     return render_template("archive.html", tasks=tasks)
+
 @app.route("/restore/<int:id>")
 def restoreTask(id):
     taskComplete = ToDo.query.get_or_404(id)
@@ -119,6 +125,7 @@ def numToWords(date):
     month = monthsList[int(date[5:7])-1]
     string = month + " " + date[8:10]+", " + date[0:4]
     return string
+
 if __name__== "__main__":
     with app.app_context():
         db.create_all()

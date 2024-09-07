@@ -19,20 +19,20 @@
         <table>
             <tr>
                 <th><h3>To-Do</h3></th>
-                <th>Added</th>
                 <th>Due</th>
-                <th>Actions</th>
+                <th></th>
             </tr>
             {% for task in tasks %}
                 {% if task.completed == 0 %} <!-- incomplete task -->
                 <tr>
                     <td><strong>{{ task.content }}</strong></td>
-                    <td>{{ task.dateCreated.date() }}</td>
+                    
                     <td>{{ task.dueDate }}</td>
                     <td>
                         <div id="actions">
                             <button id="actionBtn">•••</button>
                             <div id="actionsMenu">
+                                <h5>Added on {{ task.dateCreated.date() }}</h5>
                                 <a href="/complete/{{task.id}}">Complete</a>
                                 <a href="/delete/{{task.id}}">Delete</a>
                                 <a href="/update/{{task.id}}">Update</a>
