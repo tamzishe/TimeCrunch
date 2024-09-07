@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='images/timecrunch.png') }}">
+    <title>TimeCrunch: Archive</title>
+</head>
+<body >
+    <div class="content">
+        <h1>TimeCrunch</h1>
+        <h3>Restore Tasks</h3>
+        {% if tasks|length < 1 %}
+        <h5> There are no tasks in the archive.</h5>
+        {% else %}
+        <table>
+            <tr>
+                <th><h3>To-Do</h3></th>
+                <th>Added</th>
+                <th>Due</th>
+                <th>Actions</th>
+            </tr>
+            {% for task in tasks %}
+                {% if task.completed == 1 %} <!-- complete task -->
+                <tr>
+                    <td><strong>{{ task.content }}</strong></td>
+                    <td>{{ task.dateCreated.date() }}</td>
+                    <td>{{ task.dueDate }}</td>
+                    <td>
+                        <a href="/restore/{{task.id}}">Restore</a>
+                        <br>
+                        <a href="/delete/{{task.id}}">Delete</a>
+                    </td>
+                </tr>
+                {% endif %}
+            {% endfor %}
+        </table>
+        {% endif %}
+        <button class="btn btn2"><a href="/"><h4>To Tasks</h4></a></button>
+    </div>
+</body>
+</html>

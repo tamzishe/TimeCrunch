@@ -20,7 +20,7 @@ h1{
     font-family: josefinSans;
     font-weight:500;
 }
-h2,h5,p{
+h2,h3,h5,p{
     font-family: josefinSans;
     font-weight:200;
     margin: 0;
@@ -42,20 +42,40 @@ tr{
     margin: 10px;
     border:none
 }
-button {
+.btn {
     cursor: pointer;
-    font-family: josefinSans;
-    font-weight: 300;
-    background-color: #5121c2; 
-    border: 3px solid #5121c2;
-    color: white;
     padding: 10px 24px;
-    text-align: center;
     transition-duration: 0.4s;
 }
-button:hover {
+.btn a{
+    text-decoration: none;
+    color: white;
+}
+.btn.btn1{
+    font-family: josefinSans;
+    text-align: center;
+    font-weight: 300;
+    text-decoration: none;
+    color: white;
+    background-color: #5121c2; 
+    border: 3px solid #5121c2;
+}
+.btn.btn2{
+    font-family: josefinSans;
+    text-align: center;
+    font-weight: 300;
+    text-decoration: none;
+    color: white;
+    background-color: #422ace; 
+    border: 3px solid #422ace;
+}
+.btn.btn1:hover {
     background-color: white;
     color: #5121c2;
+}
+.btn.btn2:hover {
+    background-color: white;
+    color: #422ace;
 }
 #titleCover {
     position: fixed;

@@ -14,7 +14,7 @@ class ToDo(db.Model):
     dateCreated= db.Column(db.DateTime, default=datetime.now())
     dueDate=db.Column(db.Text, nullable=True)
     dueDateDebug=db.Column(db.Text, nullable=True)
-    completed =  db.Column(db.Integer, default=0) #send to archive
+    completed =  db.Column(db.Integer, default=0) #to send to archive
 
     def __repr__(self):
         return '<Task %r>' % self.id
@@ -32,7 +32,7 @@ def index():
                 task_dueDate=task_dueDate[0:8]
         except:
             task_dueDate="No Due Date"
-        new_task =  ToDo(content=task_content, dueDate=task_dueDate, dueDateDebug=task_dueDebug)
+        new_task =  ToDo(content=task_content, dueDate=task_dueDate, dueDateDebug=task_dueDebug, completed=0)
         try:
             db.session.add(new_task)
             db.session.commit()
@@ -57,11 +57,26 @@ def delete(id):
 def complete(id):
     taskComplete = ToDo.query.get_or_404(id)
     try:
-        taskComplete.complete=1
+        taskComplete.completed=1
         db.session.commit()
         return redirect("/")
     except:
         return 'There was a issue processing the completion of this task'
+
+@app.route("/restore")
+def restore():
+    tasks =  ToDo.query.order_by(ToDo.dateCreated).all()
+    return render_template("archive.html", tasks=tasks)
+@app.route("/restore/<int:id>")
+def restoreTask(id):
+    taskComplete = ToDo.query.get_or_404(id)
+    try:
+        taskComplete.completed = 0
+        db.session.commit()
+        return redirect("/")
+    except:
+        return 'There was a issue restoring this task'
+
 
 @app.route("/update/<int:id>", methods=["GET", "POST"])
 def update(id):

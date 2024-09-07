@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='images/timecrunch.png') }}">
     <title>TimeCrunch</title>
 </head>
 <body >
@@ -23,6 +24,7 @@
                 <th>Actions</th>
             </tr>
             {% for task in tasks %}
+                {% if task.completed == 0 %} <!-- incomplete task -->
                 <tr>
                     <td><strong>{{ task.content }}</strong></td>
                     <td>{{ task.dateCreated.date() }}</td>
@@ -35,10 +37,12 @@
                         <a href="/update/{{task.id}}">Update</a>
                     </td>
                 </tr>
+                {% endif %}
             {% endfor %}
         </table>
         {% endif %}
-        <button onclick="toggleWindow()"><h4>Add New Task</h4></button>
+        <button class="btn btn1" onclick="toggleWindow()"><h4>Add New Task</h4></button>
+        <button class="btn btn2"><a href="/restore"><h4>Completed Tasks</h4></a></button>
     </div>
     <div class=window id="openWindow">
         <div id="overlay">
