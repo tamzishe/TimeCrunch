@@ -30,11 +30,14 @@
                     <td>{{ task.dateCreated.date() }}</td>
                     <td>{{ task.dueDate }}</td>
                     <td>
-                        <a href="/complete/{{task.id}}">Complete</a>
-                        <br>
-                        <a href="/delete/{{task.id}}">Delete</a>
-                        <br>
-                        <a href="/update/{{task.id}}">Update</a>
+                        <div id="actions">
+                            <button id="actionBtn">•••</button>
+                            <div id="actionsMenu">
+                                <a href="/complete/{{task.id}}">Complete</a>
+                                <a href="/delete/{{task.id}}">Delete</a>
+                                <a href="/update/{{task.id}}">Update</a>
+                            </div>
+                        </div>
                     </td>
                 </tr>
                 {% endif %}
