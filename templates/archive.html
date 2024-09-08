@@ -28,16 +28,23 @@
                     <td>{{ task.dateCreated.date() }}</td>
                     <td>{{ task.dueDate }}</td>
                     <td>
-                        <a href="/restore/{{task.id}}">Restore</a>
-                        <br>
-                        <a href="/delete/{{task.id}}">Delete</a>
+                        <div id="actions">
+                            <button id="actionBtn">•••</button>
+                            <div id="actionsMenu">
+                                <h5>Created on {{ task.dateCreated.date() }}</h5>
+                                <a href="/restore/{{task.id}}" class="changeTodo">Restore</a>
+                                <a href="/delete/{{task.id}}" class="deleteTodo"><strong>Delete</strong></a>
+                            </div>
+                        </div>
                     </td>
                 </tr>
                 {% endif %}
             {% endfor %}
         </table>
         {% endif %}
-        <button class="btn btn2"><a href="/"><h4>To Tasks</h4></a></button>
+        <div id="buttonDiv">
+            <a href="/"><button class="btn btn2"><h4>To Tasks</h4></button></a>
+        </div>
     </div>
 </body>
 </html>

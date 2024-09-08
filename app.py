@@ -10,7 +10,7 @@ db = SQLAlchemy(app)
 class ToDo(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     content = db.Column(db.String(200), nullable=False)
-    description = db.Column(db.Text, nullable=True) 
+    description = db.Column(db.Text, nullable=True) #may be a future implementation, as of right now, I think the app is fine without it
     dateCreated= db.Column(db.DateTime, default=datetime.now())
     dueDate=db.Column(db.Text, nullable=True)
     dueDateDebug=db.Column(db.Text, nullable=True)
